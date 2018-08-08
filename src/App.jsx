@@ -16,15 +16,25 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 newBoard: action.payload,
-                new_board: 'new board action happened'
             };
 
         case 'FETCH_BOARDS':
             return {
                 ...state,
                 boards: action.payload,
-                fetching: 'fetching action happened'
-            }
+            };
+
+        case 'NEW_CARD':
+            return {
+                ...state,
+                newCard: action.payload
+            };
+
+        case 'FETCH_CARDS':
+            return {
+                ...state,
+                cards: action.payload
+            };
     }
 
     return state;

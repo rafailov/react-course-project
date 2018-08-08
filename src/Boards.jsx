@@ -21,7 +21,7 @@ class Boards extends Component {
                 <div className={"col-md-" + 12 / boardsCount} key={board.id}>
                     <div >
                         <h2>{board.title}</h2>
-                        <Cards cards={board.cards} />
+                        <Cards boardId={board.id} />
                     </div>
                 </div>
             ));
@@ -63,9 +63,17 @@ const fetchBoards = () => dispatch => {
     });
 };
 
+const createBoard = (board) => dispatch => {
+    board.id = new Date().getTime();
+    dispatch({
+        type: 'NEW_BOARD',
+        payload: board
+    });
+};
+
 const mapStateToProps = state => ({
     boards: state.boards,
     newBoard: state.newBoard
 });
 
-export default connect(mapStateToProps, { fetchBoards })(Boards);
+export default connect(mapStateToProps, { fetchBoards, createBoard })(Boards);
