@@ -50,8 +50,10 @@ Cards.propTypes = {
 
 const fetchCards = (boardId) => dispatch => {
     const cards = [
-        {id:1, title: 'Card 1', body: 'Card one body', boardId: boardId},
-        {id:2, title: 'Card 2', body: 'Card two body', boardId: boardId}
+        {id:1, title: 'Card 1', body: 'Card one body', boardId: 1},
+        {id:2, title: 'Card 2', body: 'Card two body', boardId: 2},
+        {id:1, title: 'Card 1', body: 'Card one body', boardId: 2},
+        {id:2, title: 'Card 2', body: 'Card two body', boardId: 1}
     ];
     dispatch({
         type: 'FETCH_CARDS',

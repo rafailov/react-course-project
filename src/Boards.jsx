@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Cards from './Cards';
+import BoardForm from "./BoardForm";
 
 class Boards extends Component {
+    constructor(props) {
+        super(props);
+
+        this.columnSize = this.columnSize.bind(this);
+    }
+
     componentWillMount() {
         this.props.fetchBoards();
     }
@@ -14,11 +21,16 @@ class Boards extends Component {
         }
     }
 
+    columnSize() {
+        const boardsCount = this.props.boards.length + 1;
+
+        return Math.round(12 / boardsCount);
+    }
+
     render() {
         if (this.props.boards) {
-            const boardsCount = this.props.boards.length;
             const boards = this.props.boards.map(board => (
-                <div className={"col-md-" + 12 / boardsCount} key={board.id}>
+                <div className={"board col-md-" + this.columnSize()} key={board.id}>
                     <div >
                         <h2>{board.title}</h2>
                         <Cards boardId={board.id} />
@@ -30,6 +42,9 @@ class Boards extends Component {
                 <div>
                     <div className={"row"}>
                         {boards}
+                        <div className={"col-md-" + this.columnSize()}>
+                            <BoardForm createBoard={this.props.createBoard}/>
+                        </div>
                     </div>
                 </div>
             );
@@ -51,11 +66,8 @@ Boards.propTypes = {
 
 const fetchBoards = () => dispatch => {
     const boards = [
-        {id:1, title: 'TO DO', cards: [
-            {id:1, title: 'Card 1', body: 'Card one body'},
-            {id:2, title: 'Card 2', body: 'Card two body'}
-        ]},
-        {id:2, title: 'DONE', cards: []}
+        {id:1, title: 'TO DO'},
+        {id:2, title: 'DONE'}
     ];
     dispatch({
         type: 'FETCH_BOARDS',
