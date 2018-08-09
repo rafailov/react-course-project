@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import './index.css';
+import { cardPropTypes } from '../validators/card';
+import '../index.css';
 import CardForm from "./CardForm";
+import { fetchCards, createCard } from '../actions/cardActions';
 
 class Cards extends Component {
     componentWillMount() {
@@ -39,39 +40,11 @@ class Cards extends Component {
      );
   }
 }
-
-Cards.propTypes = {
-    fetchCards: PropTypes.func.isRequired,
-    createCard: PropTypes.func.isRequired,
-    cards: PropTypes.array,
-    newCard: PropTypes.object,
-    boardId: PropTypes.number.isRequired
-};
-
-const fetchCards = (boardId) => dispatch => {
-    const cards = [
-        {id:1, title: 'Card 1', body: 'Card one body', boardId: 1},
-        {id:2, title: 'Card 2', body: 'Card two body', boardId: 2},
-        {id:1, title: 'Card 1', body: 'Card one body', boardId: 2},
-        {id:2, title: 'Card 2', body: 'Card two body', boardId: 1}
-    ];
-    dispatch({
-        type: 'FETCH_CARDS',
-        payload: cards
-    });
-};
-
-const createCard = (card) => dispatch => {
-    card.id = new Date().getTime();
-    dispatch({
-        type: 'NEW_CARD',
-        payload: card
-    });
-};
+Cards.propTypes = cardPropTypes();
 
 const mapStateToProps = state => ({
-    cards: state.cards,
-    newCard: state.newCard
+    cards: state.cards.all,
+    newCard: state.cards.new
 });
 
 export default connect(mapStateToProps, { fetchCards, createCard })(Cards);

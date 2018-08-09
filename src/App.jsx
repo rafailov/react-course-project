@@ -1,53 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import Boards from './Boards'
-
-const middleware = [thunk];
-const initialState = {
-    newBoard: {},
-    boards: []
-};
-
-const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case 'NEW_BOARD':
-            return {
-                ...state,
-                newBoard: action.payload,
-            };
-
-        case 'FETCH_BOARDS':
-            return {
-                ...state,
-                boards: action.payload,
-            };
-
-        case 'NEW_CARD':
-            return {
-                ...state,
-                newCard: action.payload
-            };
-
-        case 'FETCH_CARDS':
-            return {
-                ...state,
-                cards: action.payload
-            };
-    }
-
-    return state;
-};
-
-const store = createStore(
-    reducer,
-    {},
-    compose(
-        applyMiddleware(...middleware),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
-);
+import Boards from './components/Boards';
+import store from './store';
 
 class App extends Component {
   render() {

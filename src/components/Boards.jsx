@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import Cards from './Cards';
-import BoardForm from "./BoardForm";
+import BoardForm from './BoardForm';
+import { boardPropTypes } from '../validators/board';
+import { fetchBoards, createBoard } from '../actions/boardActions';
 
 class Boards extends Component {
     constructor(props) {
@@ -23,7 +24,6 @@ class Boards extends Component {
 
     columnSize() {
         const boardsCount = this.props.boards.length + 1;
-
         return Math.round(12 / boardsCount);
     }
 
@@ -58,34 +58,11 @@ class Boards extends Component {
     }
 }
 
-Boards.propTypes = {
-    fetchBoards: PropTypes.func.isRequired,
-    boards: PropTypes.array,
-    newBoard: PropTypes.object
-};
-
-const fetchBoards = () => dispatch => {
-    const boards = [
-        {id:1, title: 'TO DO'},
-        {id:2, title: 'DONE'}
-    ];
-    dispatch({
-        type: 'FETCH_BOARDS',
-        payload: boards
-    });
-};
-
-const createBoard = (board) => dispatch => {
-    board.id = new Date().getTime();
-    dispatch({
-        type: 'NEW_BOARD',
-        payload: board
-    });
-};
+Boards.propTypes = boardPropTypes;
 
 const mapStateToProps = state => ({
-    boards: state.boards,
-    newBoard: state.newBoard
+    boards: state.boards.all,
+    newBoard: state.boards.new
 });
 
 export default connect(mapStateToProps, { fetchBoards, createBoard })(Boards);
