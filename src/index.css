@@ -11,8 +11,17 @@
     border-radius: 4px;
     height: 100%;
 }
-.card-item h3 {
+.board h2 {
     display: inline-block;
+    width: 85%;
+}
+.card-item h3 {
+    width: 85%;
+    display: inline-block;
+}
+.card-item h3 span {
+    color: #999;
+    font-size: 20px;
 }
 .card-item p {
     margin-left: 10px ;
@@ -39,17 +48,20 @@ form .row {
     padding: 0;
     font-size: 25px;
 }
-.btn-delete-card {
+.btn-delete-article {
     cursor: pointer;
     padding: 5px 7px;
+    border-radius: 5px;
     border: 1px solid #fff;
-    border-radius: 0;
     color: #ccc;
 }
-.btn-delete-card:hover {
+.btn-delete-article:hover {
     color: lightcoral;
-    border-radius: 5px;
     border: 1px solid lightcoral;
+}
+.board .btn-delete-article {
+    margin: 10px;
+    color: lightcoral;
 }
 .btn-add {
     border-color: #55d26e;

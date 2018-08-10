@@ -1,6 +1,7 @@
 /** BOARD */
 export const NEW_BOARD = 'NEW_BOARD';
 export const FETCH_BOARDS = 'FETCH_BOARDS';
+export const DELETE_BOARD = 'DELETE_BOARD';
 
 /** CARD */
 export const NEW_CARD = 'NEW_CARD';

@@ -11,9 +11,10 @@ const boardReducer = (state = initialState, action) => {
                 ...state,
                 title: action.payload
             };
-    }
 
-    return state;
+        default:
+            return state;
+    }
 };
 
 export default boardReducer;

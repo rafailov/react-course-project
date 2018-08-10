@@ -33,9 +33,9 @@ class Cards extends Component {
               .filter(card => (card.boardId === boardId && card.title.toLowerCase().includes(this.props.filter)))
               .map(card => (
                   <div className={"card-item"} key={card.id}>
-                      <h3>{card.title}</h3>
+                      <h3>{card.title} <span>by {card.creator}</span></h3>
                       <span
-                          className={"btn-delete-card float-right"}
+                          className={"btn-delete-article float-right"}
                           onClick={this.removeCard}
                           data-card-id={card.id}
                       >X</span>

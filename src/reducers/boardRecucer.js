@@ -1,4 +1,4 @@
-import { NEW_BOARD, FETCH_BOARDS } from '../actions/types';
+import {NEW_BOARD, FETCH_BOARDS, DELETE_BOARD} from '../actions/types';
 
 const initialState = {
     new: {},
@@ -18,9 +18,20 @@ const boardReducer = (state = initialState, action) => {
                 ...state,
                 all: action.payload,
             };
-    }
+        case DELETE_BOARD:
+            return {
+                ...state,
+                all: state.all.filter((board) => {
+                    if (board.id !== parseInt(action.payload, 10)) {
+                        return board;
+                    }
 
-    return state;
+                    return null;
+                })
+            };
+        default:
+            return state;
+    }
 };
 
 export default boardReducer;

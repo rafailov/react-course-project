@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import Cards from './Cards';
 import BoardForm from './BoardForm';
 import { boardPropTypes } from '../validators/board';
-import { fetchBoards, createBoard } from '../actions/boardActions';
+import { fetchBoards, createBoard, deleteBoard } from '../actions/boardActions';
 
 class Boards extends Component {
     constructor(props) {
         super(props);
 
         this.columnSize = this.columnSize.bind(this);
+        this.removeBoard = this.removeBoard.bind(this);
     }
 
     componentWillMount() {
@@ -28,12 +29,21 @@ class Boards extends Component {
         return Math.round(12 / boardsCount);
     }
 
+    removeBoard({ target }) {
+        this.props.deleteBoard(target.getAttribute('data-board-id'));
+    }
+
     render() {
         if (this.props.boards) {
             const boards = this.props.boards.map(board => (
                 <div className={"board col-md-" + this.columnSize()} key={board.id}>
                     <div >
                         <h2>{board.title}</h2>
+                        <span
+                            className="float-right btn-delete-article"
+                            onClick={this.removeBoard}
+                            data-board-id={board.id}
+                        >X</span>
                         <Cards boardId={board.id} />
                     </div>
                 </div>
@@ -66,4 +76,4 @@ const mapStateToProps = state => ({
     newBoard: state.boards.new
 });
 
-export default connect(mapStateToProps, { fetchBoards, createBoard })(Boards);
+export default connect(mapStateToProps, { fetchBoards, createBoard, deleteBoard })(Boards);

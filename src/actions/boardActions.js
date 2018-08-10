@@ -1,4 +1,4 @@
-import { NEW_BOARD, FETCH_BOARDS } from '../actions/types';
+import { NEW_BOARD, FETCH_BOARDS, DELETE_BOARD } from '../actions/types';
 
 export const fetchBoards = () => dispatch => {
     const boards = [
@@ -16,5 +16,12 @@ export const createBoard = (board) => dispatch => {
     dispatch({
         type: NEW_BOARD,
         payload: board
+    });
+};
+
+export const deleteBoard = (boardId) => dispatch => {
+    dispatch({
+        type: DELETE_BOARD,
+        payload: boardId
     });
 };

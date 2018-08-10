@@ -23,14 +23,17 @@ const boardReducer = (state = initialState, action) => {
             return {
                 ...state,
                 all: state.all.filter((card) => {
-                        if (card.id !== parseInt(action.payload)) {
+                        if (card.id !== parseInt(action.payload, 10)) {
                             return card;
                         }
-                    })
-            }
-    }
 
-    return state;
+                        return null;
+                    })
+            };
+
+        default:
+            return state;
+    }
 };
 
 export default boardReducer;
