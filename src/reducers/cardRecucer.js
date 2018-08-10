@@ -1,4 +1,4 @@
-import { NEW_CARD, FETCH_CARDS } from '../actions/types';
+import { NEW_CARD, FETCH_CARDS, DELETE_CARD } from '../actions/types';
 
 const initialState = {
     new: {},
@@ -7,7 +7,6 @@ const initialState = {
 
 const boardReducer = (state = initialState, action) => {
     switch (action.type) {
-
         case NEW_CARD:
             return {
                 ...state,
@@ -16,9 +15,19 @@ const boardReducer = (state = initialState, action) => {
 
         case FETCH_CARDS:
             return {
-                ...state,
-                all: action.payload
+                ...state
+                //: action.payload
             };
+
+        case DELETE_CARD:
+            return {
+                ...state,
+                all: state.all.filter((card) => {
+                        if (card.id !== parseInt(action.payload)) {
+                            return card;
+                        }
+                    })
+            }
     }
 
     return state;

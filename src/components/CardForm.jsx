@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { createCardValidation } from '../validators/card';
 import '../index.css';
 
 const initialState = {
@@ -22,6 +23,10 @@ class CardForm extends Component {
 
     addCard(ev) {
         ev.preventDefault();
+
+        if (! createCardValidation(this.state)) {
+            return;
+        }
 
         this.props.createCard({...this.state, boardId: this.props.boardId});
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { createBoardValidation } from '../validators/board';
 import '../index.css';
 
 const initialState = {
@@ -18,6 +19,10 @@ class BoardForm extends Component {
 
     addBoard(ev) {
         ev.preventDefault();
+
+        if (! createBoardValidation(this.state.title)) {
+            return;
+        }
 
         this.props.createBoard({ title: this.state.title});
 
@@ -41,7 +46,7 @@ class BoardForm extends Component {
         return (
             <div>
                 <button className={"btn btn-add-board"} onClick={this.showForm}>+</button>
-                <form onSubmit={this.cardAdded} className={"card-form "  + (this.state.modalShown ? "shown" : "hidden")}>
+                <form onSubmit={this.addBoard} className={"board-form " + (this.state.modalShown ? "shown" : "hidden")}>
                     <div className="row">
                         <div className="col-md-12">
                             <input

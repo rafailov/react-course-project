@@ -8,8 +8,14 @@ const middleware = [thunk];
 const store = createStore(
     reducer,
     {
-        newBoard: {},
-        boards: []
+        boards: {
+            all: [],
+            new: {}
+        },
+        cards: {
+            all: [],
+            new: {}
+        }
     },
     compose(
         applyMiddleware(...middleware),

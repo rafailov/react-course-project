@@ -24,6 +24,7 @@ class Boards extends Component {
 
     columnSize() {
         const boardsCount = this.props.boards.length + 1;
+
         return Math.round(12 / boardsCount);
     }
 
