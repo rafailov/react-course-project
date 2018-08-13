@@ -13,7 +13,8 @@ const store = createStore(
         },
         cards: {
             all: [],
-            new: {}
+            new: {},
+            current: {}
         }
     },
     compose(

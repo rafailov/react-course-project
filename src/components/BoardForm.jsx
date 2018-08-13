@@ -21,6 +21,7 @@ class BoardForm extends Component {
         ev.preventDefault();
 
         if (! createBoardValidation(this.state.title)) {
+            alert('Board data validation failed!');
             return;
         }
 

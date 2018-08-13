@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { cardPropTypes } from '../validators/card';
 import CardForm from './CardForm';
 import { fetchCards, createCard, deleteCard } from '../actions/cardActions';
@@ -33,7 +34,9 @@ class Cards extends Component {
               .filter(card => (card.boardId === boardId && card.title.toLowerCase().includes(this.props.filter)))
               .map(card => (
                   <div className={"card-item"} key={card.id}>
-                      <h3>{card.title} <span>by {card.creator}</span></h3>
+                      <Link to={'/card/' + card.id}>
+                        <h3>{card.title} <span> {(card.creator ? 'by ' + card.creator : '')} </span></h3>
+                      </Link>
                       <span
                           className={"btn-delete-article float-right"}
                           onClick={this.removeCard}

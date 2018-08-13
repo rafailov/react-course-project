@@ -42,7 +42,8 @@ class Filter extends Component {
 Filter.propTypes = filterPropTypes;
 
 const mapStateToProps = (state) => ({
-    filter: state.filter.title
+    filter: state.filter.title,
+    boards: state.boards.all
 });
 
 export default connect(mapStateToProps, { filterCards })(Filter);

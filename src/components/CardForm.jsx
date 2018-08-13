@@ -25,6 +25,7 @@ class CardForm extends Component {
         ev.preventDefault();
 
         if (! createCardValidation(this.state)) {
+            alert('Card data validation failed!');
             return;
         }
 

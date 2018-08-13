@@ -16,18 +16,12 @@ const boardReducer = (state = initialState, action) => {
         case FETCH_BOARDS:
             return {
                 ...state,
-                all: action.payload,
+                //all: action.payload,
             };
         case DELETE_BOARD:
             return {
                 ...state,
-                all: state.all.filter((board) => {
-                    if (board.id !== parseInt(action.payload, 10)) {
-                        return board;
-                    }
-
-                    return null;
-                })
+                all: state.all.filter((board) => (board.id !== parseInt(action.payload, 10)))
             };
         default:
             return state;

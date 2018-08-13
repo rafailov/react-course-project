@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import Boards from './Boards';
 import store from '../store';
-import Filter from "./Filter";
+import BoardsView from "../views/BoardsView";
+import CardView from "../views/CardView";
 
 class App extends Component {
   render() {
@@ -11,9 +12,15 @@ class App extends Component {
             <div className="App">
                 <header className="App-header">
                     <h1 className="App-title">Trello :)</h1>
-                    <Filter />
-                    <Boards />
                 </header>
+
+                <React.Fragment>
+                    <Switch>
+                        <Route path="/" component={BoardsView} exact />
+                        <Route path="/card/:id" component={CardView} />
+                        <Redirect to="/" />
+                    </Switch>
+                </React.Fragment>
             </div>
         </Provider>
      );
